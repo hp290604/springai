@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
-function App() {
-  const [count, setCount] = useState(0)
+function Users() {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     const startTime = Date.now();
+
+  //     const response = await axios.get(
+  //       "https://jsonplaceholder.typicode.com/users"
+  //     );
+
+  //     const elapsedTime = Date.now() - startTime;
+  //     const remainingTime = 1000 - elapsedTime;
+
+  //     // Ensure loader shows at least 1 second
+  //     setTimeout(() => {
+  //       setUsers(response.data);
+  //       setLoading(false);
+  //     }, remainingTime > 0 ? remainingTime : 0);
+  //   };
+
+  //   fetchUsers();
+  // }, []);
+
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <h2>Users List</h2>
+      {users.map((user) => (
+        <p key={user.id}>{user.name}</p>
+      ))}
+    </div>
+  );
 }
 
-export default App
+export default Users;
