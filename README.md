@@ -1,2 +1,2 @@
 # springai
-
+spring ai practice
