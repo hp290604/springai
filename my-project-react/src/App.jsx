@@ -1,16 +1,34 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import reactLogo from "./assets/react.svg";
 
 function Users() {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const response = axios.get("https://dummyjson.com/products")
-                    .then(response=>{
-                      setTotal(response.data.total);
-                      setLoading(false);
-                    })
+    setTimeout(()=>{
+      // const response = axios.get("https://dummyjson.com/products")
+      //               .then(response=>{
+      //                 setTotal(response.data.total);
+      //                 setLoading(false);
+      //               })
+      const date =Date.now();
+      const resp = async()=>{
+        const response = await axios.get("https://dummyjson.com/products");
+        return response;
+      }
+      resp()
+      
+      .then(response=>{
+        const elapsedTime = Date.now() - date;
+        console.log(elapsedTime);
+        setTotal(response.data.total);
+        setLoading(false);
+      });
+
+    },1000);
+    
   }, []);
     // const product = axios.post('https://dummyjson.com/products/add',{title:'product initialised'})
                   // .then(response => console.log(response.data));
@@ -36,7 +54,7 @@ function Users() {
   // }, []);
 
   if (loading) {
-    return <h2>Loading...</h2>;
+    return <div><img src={reactLogo} alt="react logo" /></div>;
   }
 
   return (
