@@ -6,13 +6,14 @@ function Users() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const response = axios.all([axios.get('https://dummyjson.com/products')])
-                  .then(axios.spread((products)=>{
-                    setTotal(products.data.total);
-                  }))
+    const response = axios.get("https://dummyjson.com/products")
+                    .then(response=>{
+                      setTotal(response.data.total);
+                      setLoading(false);
+                    })
   }, []);
-    const product = axios.post('https://dummyjson.com/products/add',{title:'product initialised'})
-                  .then(response => console.log(response.data));
+    // const product = axios.post('https://dummyjson.com/products/add',{title:'product initialised'})
+                  // .then(response => console.log(response.data));
 
   //   const fetchUsers = async () => {
   //     const startTime = Date.now();
@@ -34,9 +35,9 @@ function Users() {
   //   fetchUsers();
   // }, []);
 
-  // if (loading) {
-  //   return <h2>Loading...</h2>;
-  // }
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
 
   return (
     <div>
