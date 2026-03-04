@@ -3,27 +3,25 @@ package com.springai.project;
 
 import com.springai.project.service.ModelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartException;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.*;
+// import org.springframework.web.multipart.MultipartException;
+// import org.springframework.web.multipart.MultipartFile;
 
-import java.io.FileNotFoundException;
+// import java.io.FileNotFoundException;
 
 @RestController
 public class MyController {
     @Autowired
     private ModelService modelService;
     @GetMapping
-    public String modelResponse(@RequestParam String message){
+    public String modelResponse(@RequestParam String message ){
         try{
-            this.modelService.getResponse(message);
+            return this.modelService.getResponse(message);
         }
-        finally {
-            return "hello world";
-        }
+        finally{}
+        // finally {
+        //     return "hello world";
+        // }
 
     }
 //    @GetMapping
