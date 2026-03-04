@@ -2,10 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 function Users() {
-  const [users, setUsers] = useState([]);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
+  useEffect(() => {
+    const response = axios.all([axios.get('https://dummyjson.com/products')])
+                  .then(axios.spread((products)=>{
+                    setTotal(products.data.total);
+                  }))
+  }, []);
+    const product = axios.post('https://dummyjson.com/products/add',{title:'product initialised'})
+                  .then(response => console.log(response.data));
+
   //   const fetchUsers = async () => {
   //     const startTime = Date.now();
 
@@ -26,16 +34,14 @@ function Users() {
   //   fetchUsers();
   // }, []);
 
-  if (loading) {
-    return <h2>Loading...</h2>;
-  }
+  // if (loading) {
+  //   return <h2>Loading...</h2>;
+  // }
 
   return (
     <div>
       <h2>Users List</h2>
-      {users.map((user) => (
-        <p key={user.id}>{user.name}</p>
-      ))}
+      {total}
     </div>
   );
 }
