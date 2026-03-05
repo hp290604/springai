@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import reactLogo from "./assets/react.svg";
 import api from './utils/Utils';
+import AppRoutes from "./routes/AppRoutes";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function Users() {
   const [total, setTotal] = useState(0);
@@ -63,10 +65,9 @@ function Users() {
   }
 
   return (
-    <div>
-      <h2>Users List</h2>
-      {total}
-    </div>
+    <BrowserRouter>
+    <AppRoutes />
+    </BrowserRouter>
   );
 }
 
