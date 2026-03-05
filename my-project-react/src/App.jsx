@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import reactLogo from "./assets/react.svg";
+import api from './utils/Utils';
 
 function Users() {
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  axios.interceptors.request.use((request)=>{
+    console.log("request sent");
+    return request
+  })
   useEffect(() => {
     setTimeout(()=>{
       // const response = axios.get("https://dummyjson.com/products")
@@ -15,14 +20,14 @@ function Users() {
       //               })
       const date =Date.now();
       const resp = async()=>{
-        const response = await axios.get("https://dummyjson.com/products");
+        const response = await api.get("/products");
         return response;
       }
       resp()
-      
+
       .then(response=>{
         const elapsedTime = Date.now() - date;
-        console.log(elapsedTime);
+        console.log(response);
         setTotal(response.data.total);
         setLoading(false);
       });

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 // import java.io.FileNotFoundException;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 public class MyController {
     @Autowired
     private ModelService modelService;
